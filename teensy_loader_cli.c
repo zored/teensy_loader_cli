@@ -619,12 +619,6 @@ void init_hid_manager(void)
 	IOHIDManagerRegisterDeviceMatchingCallback(hid_manager, attach_callback, NULL);
 	IOHIDManagerRegisterDeviceRemovalCallback(hid_manager, detach_callback, NULL);
 	ret = IOHIDManagerOpen(hid_manager, kIOHIDOptionsTypeNone);
-	if (ret != kIOReturnSuccess) {
-		IOHIDManagerUnscheduleFromRunLoop(hid_manager,
-			CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-		CFRelease(hid_manager);
-		printf_verbose("Error opening HID Manager\n");
-	}
 }
 
 static void do_run_loop(void)
